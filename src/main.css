@@ -1,0 +1,42 @@
+body {
+  background: #a6be8f;
+  color: #1e1f1d;
+}
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .post-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  article {
+    background-color: #dee5d9;
+    flex: 0 1 32%;
+    margin: 10px auto;
+    border-radius: 2mm;
+  }
+
+  article h2 {
+    color: #1e1f1d;
+    text-align: center;
+    font-size: 15;
+    margin: 10px;
+  }
+
+  article p {
+    color: #1e1f1d;
+    font-size: 10;
+    margin: 10px;
+  }
+}
