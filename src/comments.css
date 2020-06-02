@@ -1,0 +1,14 @@
+.comment-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.comment {
+  background-color: #a6be8f;
+  margin: 10px auto;
+  display: flex;
+  border-radius: 1mm;
+  min-height: 50px;
+  max-height: 150px;
+  align-content: center;
+}

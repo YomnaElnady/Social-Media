@@ -6,13 +6,37 @@ import './main.css'
 import { Pagination } from '@material-ui/lab'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import CommentsList from './Commnets'
+import ReadMoreReact from 'read-more-react'
 
 function Card(posts) {
+  const [showComments, setShowComments] = useState(false)
+  const [postId, setPostId] = useState(0)
+
   const listItems = posts.posts.map(post => {
     return (
-      <article>
-        <h2>{post.title}</h2>
-        <p>{post.body}</p>
+      <article id={Math.random.toString}>
+        <h2 style={{ fontSize: 15, fontFamily: crypto }}>{post.title}</h2>
+        <div style={{ margin: 10, alignItems: 'center' }}>
+          {/* /* <ReadMoreReact text={body} max={150} readMoreText={'...read more'} />*/}
+          <p>{post.body}</p>
+          <button
+            style={{ marginTop: 10 }}
+            onClick={() => {
+              setPostId(post.id)
+              setShowComments(!showComments)
+            }}
+          >
+            Comments
+          </button>
+        </div>
+        <div>
+          {showComments ? (
+            <CommentsList postId={postId} />
+          ) : (
+            <DotLoader size={10} color={'white'} loading={showComments} />
+          )}
+        </div>
       </article>
     )
   })
@@ -33,12 +57,14 @@ function Main() {
   const [posts, setPosts] = useState([])
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(4)
+  const [postsPerPage, setPostsPerPage] = useState(3)
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
+      setPosts(res.data)
+      setLoading(false)
+    })
+  }, [posts])
 
-  axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
-    setPosts(res.data)
-    setLoading(false)
-  })
   useEffect(() => {
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
@@ -68,7 +94,6 @@ function Main() {
           <Pagination
             count={Math.ceil(posts.length / postsPerPage)}
             onChange={(event, page) => {
-              console.log('hi', page)
               setCurrentPage(page)
             }}
           />

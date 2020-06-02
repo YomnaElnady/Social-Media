@@ -13,11 +13,13 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin: 100px;
   }
   .post-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
   }
 
   article {
@@ -25,18 +27,15 @@ body {
     flex: 0 1 32%;
     margin: 10px auto;
     border-radius: 2mm;
+    align-items: center;
+    min-height: 250px;
+    min-width: 300px;
   }
 
   article h2 {
     color: #1e1f1d;
     text-align: center;
-    font-size: 15;
-    margin: 10px;
-  }
-
-  article p {
-    color: #1e1f1d;
-    font-size: 10;
+    font-size: 5;
     margin: 10px;
   }
 }
