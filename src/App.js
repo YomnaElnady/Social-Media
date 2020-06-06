@@ -8,7 +8,7 @@ function Start() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 style={{ fontFamily: 'Spicy Rice', color: 'black', fontSize: 70 }}>
+        <h1 style={{ fontFamily: 'Spicy Rice', color: 'black', fontSize: 60 }}>
           Journey Around The World Through Social Media
         </h1>
         <img src={logo} className="App-logo" alt="logo" />
