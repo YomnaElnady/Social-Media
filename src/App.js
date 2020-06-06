@@ -1,13 +1,16 @@
 import React, { Component, useState, useEffect } from 'react'
 import { Router, Route, Switch } from 'react-router'
-import logo from './globe.png'
+import logo from './assets/globe.png'
 import './App.css'
-import Main from './main'
+import Main from './components/main'
 
 function Start() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1 style={{ fontFamily: 'Spicy Rice', color: 'black', fontSize: 70 }}>
+          Journey Around The World Through Social Media
+        </h1>
         <img src={logo} className="App-logo" alt="logo" />
       </header>
     </div>

@@ -8,40 +8,82 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import CommentsList from './Commnets'
 import ReadMoreReact from 'read-more-react'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
 
 function Card(posts) {
   const [showComments, setShowComments] = useState(false)
   const [postId, setPostId] = useState(0)
-
+  const [open, setOpen] = useState(false)
+  const handleClick = (event, id) => {
+    setPostId(id)
+    setOpen(!open)
+    setShowComments(true)
+  }
   const listItems = posts.posts.map(post => {
     return (
-      <article id={Math.random.toString}>
-        <h2 style={{ fontSize: 15, fontFamily: crypto }}>{post.title}</h2>
-        <div style={{ margin: 10, alignItems: 'center' }}>
+      <article>
+        <h2 style={{ fontSize: 15, fontFamily: crypto, color: '#1A237E' }}>
+          {post.title.toUpperCase()}
+        </h2>
+        <div style={{ margin: 10, alignItems: 'center', color: '#1A237E' }}>
           {/* /* <ReadMoreReact text={body} max={150} readMoreText={'...read more'} />*/}
           <p>{post.body}</p>
-          <button
-            style={{ marginTop: 10 }}
-            onClick={() => {
-              setPostId(post.id)
-              setShowComments(!showComments)
-            }}
-          >
-            Comments
-          </button>
-        </div>
-        <div>
-          {showComments ? (
-            <CommentsList postId={postId} />
+          {open & (postId == post.id) ? (
+            <div
+              className="comments"
+              button
+              onClick={event => {
+                console.log(post.id)
+                handleClick(event, post.id)
+              }}
+            >
+              <div>
+                {showComments ? (
+                  <CommentsList postId={postId} />
+                ) : (
+                  <h1
+                    style={{
+                      fontSize: 15,
+                      fontFamily: crypto,
+                      color: '#1A237E',
+                    }}
+                  >
+                    loading
+                  </h1>
+                )}
+              </div>
+              <ExpandLess />
+            </div>
           ) : (
-            <DotLoader size={10} color={'white'} loading={showComments} />
+            <div
+              className="comments"
+              button
+              onClick={event => {
+                console.log(post.id)
+                handleClick(event, post.id)
+              }}
+            >
+              <h1 style={{ fontSize: 15, fontFamily: crypto }}>Comments</h1>
+              <ExpandMore />
+            </div>
           )}
         </div>
       </article>
     )
   })
   return (
-    <div>
+    <div style={{ alignItems: 'center' }}>
+      <h1
+        style={{
+          fontSize: 80,
+          fontFamily: 'Spicy Rice',
+          margin: 20,
+          color: '#dee5d9',
+        }}
+      >
+        ..POSTS..
+      </h1>
       <ul className="post-container">{listItems}</ul>
     </div>
   )
@@ -92,6 +134,7 @@ function Main() {
         <div className="container">
           <Card posts={currentPosts} />
           <Pagination
+            color="primary"
             count={Math.ceil(posts.length / postsPerPage)}
             onChange={(event, page) => {
               setCurrentPage(page)

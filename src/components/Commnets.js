@@ -24,10 +24,17 @@ function CommentsList(id) {
     console.log(id.postId, comment.body)
     return (
       <div className="comment">
-        <h1 style={{ fontSize: 7, fontFamily: crypto, color: '#1e1f1d' }}>
+        <h1
+          style={{
+            fontSize: 9,
+            fontFamily: crypto,
+            color: '#1A237E',
+            margin: 10,
+          }}
+        >
           {comment.name}
         </h1>
-        <p style={{ fontSize: 6, fontFamily: crypto, color: '#1e1f1d' }}>
+        <p style={{ fontSize: 8, fontFamily: crypto, color: '#1A237E' }}>
           {comment.body}
         </p>
       </div>
