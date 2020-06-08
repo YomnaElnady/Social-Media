@@ -97,14 +97,19 @@ function Main() {
   `
   const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([])
+  const [postsFetched, setPostsFetched] = useState(false)
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(3)
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
-      setPosts(res.data)
-      setLoading(false)
-    })
+    if (!postsFetched) {
+      axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
+        console.log(posts)
+        setPosts(res.data)
+        setLoading(false)
+        setPostsFetched(true)
+      })
+    }
   }, [posts])
 
   useEffect(() => {

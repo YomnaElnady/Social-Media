@@ -10,14 +10,18 @@ function CommentsList(id) {
     border-color: red;
   `
   const [comments, setComments] = useState([])
+  const [commentsFetched, setCommentsFetched] = useState(false)
   const [showComments, setShowComments] = useState(false)
   useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${id.postId}/comments`)
-      .then(res => {
-        setComments(res.data)
-        setShowComments(true)
-      })
+    if (!commentsFetched) {
+      axios
+        .get(`https://jsonplaceholder.typicode.com/posts/${id.postId}/comments`)
+        .then(res => {
+          setComments(res.data)
+          setShowComments(true)
+          setCommentsFetched(true)
+        })
+    }
   }, [comments])
 
   const listItems = comments.map(comment => {
